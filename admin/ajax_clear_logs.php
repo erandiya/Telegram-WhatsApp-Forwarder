@@ -25,4 +25,12 @@ if ($file && file_exists($file)) {
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Log file not found at: ' . $file]);
 }
+
+// admin/ajax_clear_logs.php හි අවසානයට එක් කරන්න
+if ($_GET['type'] === 'pm2') {
+    // PM2 ලොග් සම්පූර්ණයෙන් පිරිසිදු කරයි
+    shell_exec("pm2 flush");
+    echo json_encode(['status' => 'success']);
+    exit;
+}
 ?>
