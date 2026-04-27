@@ -35,6 +35,16 @@ checkAuth();
                     </p>
                 </div>
             </div>
+            
+            <div class="bg-gray-800/40 p-6 rounded-3xl border border-gray-800 shadow-xl">
+                <h3 class="text-gray-500 text-xs font-bold uppercase tracking-widest">Messages Today</h3>
+                <p class="text-4xl font-black mt-3 text-green-400">
+                    <?php 
+                        echo $pdo->query("SELECT COUNT(*) FROM sync_logs WHERE status='SUCCESS' AND DATE(created_at) = CURDATE()")->fetchColumn(); 
+                    ?>
+                </p>
+                <p class="text-[10px] text-gray-600 mt-2">Successfully delivered messages</p>
+            </div>
 
         </div>
     </div>

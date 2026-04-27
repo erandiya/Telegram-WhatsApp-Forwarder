@@ -20,6 +20,8 @@ rm -f /var/www/msg-sync/MadelineProto.log
 # 3. පද්ධතිය නැවත පණ ගැන්වීම
 /usr/bin/pm2 restart all
 
+mysql -u root -e "DELETE FROM sync_logs WHERE created_at < DATE_SUB(NOW(), INTERVAL 30 DAY)" msg_sync_db
+
 echo "Full Maintenance & Restart completed at $(date)" >> /var/www/msg-sync/maintenance.log
 
 timedatectl set-timezone Asia/Colombo

@@ -16,7 +16,8 @@ if (in_array($current_minute, $allowed_minutes) && $current_minute !== $last_hea
     $tg_logo = __DIR__ . '/telegram1.png';
 
     // ඩේටාබේස් එකෙන් targets ලබා ගැනීම
-    $stmt = $pdo->query("SELECT * FROM notification_targets");
+    // heartbeat.php තුළ වෙනස් කරන්න
+    $stmt = $pdo->query("SELECT * FROM notification_targets WHERE is_enabled = 1");
     $targets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($targets as $row) {
