@@ -1,0 +1,72 @@
+/* admin/assets/css/style.css */
+
+/* --- Navbar (Top - Full Width) --- */
+#main-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 2000; /* සියල්ලටම උඩින් */
+    background-color: #111827;
+    border-bottom: 1px solid #1f2937;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+/* --- Sidebar (Starts after Navbar) --- */
+#sidebar {
+    width: 260px;
+    position: fixed;
+    top: 70px; /* Navbar උසට පසුව */
+    left: 0;
+    height: calc(100vh - 70px);
+    z-index: 1000;
+    background-color: #0d111c;
+    border-right: 1px solid #1f2937;
+    transition: transform 0.3s ease;
+}
+
+/* --- Content (Pushed down and left) --- */
+.main-content {
+    margin-left: 260px;
+    margin-top: 70px; /* Navbar එකට යට නොවී පහළින් ආරම්භ වීමට */
+    padding: 2.5rem; /* ඇතුළත ඉඩ */
+    min-height: calc(100vh - 70px);
+    transition: margin-left 0.3s ease;
+}
+
+/* Sidebar හකුලන විට (Desktop) */
+.sidebar-collapsed { transform: translateX(-260px); }
+.main-full { margin-left: 0 !important; }
+
+/* --- Mobile View --- */
+@media (max-width: 768px) {
+    .main-content { 
+        margin-left: 0 !important; 
+        margin-top: 75px; /* Mobile වලදී මඳක් වැඩි ඉඩක් */
+        padding: 1.5rem;
+    }
+    #sidebar { 
+        transform: translateX(-100%); 
+        z-index: 3000; 
+        top: 0; 
+        height: 100vh; 
+    }
+    #sidebar.mobile-active { transform: translateX(0); }
+    #sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 2500;
+    }
+    #sidebar-overlay.active { display: block; }
+}
+
+/* Status Dots */
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.bg-online { background-color: #4ade80; box-shadow: 0 0 8px #4ade80; }
+.bg-offline { background-color: #f87171; box-shadow: 0 0 8px #f87171; }
+.bg-warning { background-color: #fbbf24; box-shadow: 0 0 8px #fbbf24; }

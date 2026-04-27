@@ -66,7 +66,7 @@ while (true) {
 
     // ඩේටාබේස් එකෙන් නීති ලබා ගැනීම
     $replacements = $pdo->query("SELECT find_text, replace_with FROM word_replacements")->fetchAll(PDO::FETCH_KEY_PAIR);
-    $mappings = $pdo->query("SELECT * FROM forward_mappings")->fetchAll(PDO::FETCH_ASSOC);
+    $mappings = $pdo->query("SELECT * FROM forward_mappings WHERE `is_enabled`=1")->fetchAll(PDO::FETCH_ASSOC);
 
     $download_dir = __DIR__ . '/downloads';
     if (!file_exists($download_dir)) mkdir($download_dir, 0777, true);

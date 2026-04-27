@@ -118,5 +118,24 @@ app.get('/status', (req, res) => {
     res.json({ status: 'online' });
 });
 
+app.get('/list-all-entities', async (req, res) => {
+    try {
+        const chats = await client.getChats();
+        const data = await Promise.all(chats.map(async chat => {
+            let picUrl = "";
+            try { picUrl = await chat.getProfilePicUrl(); } catch(e) {}
+            return {
+                id: chat.id._serialized,
+                name: chat.name,
+                canSend: !chat.isReadOnly,
+                pic: picUrl
+            };
+        }));
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.listen(3000, '0.0.0.0', () => console.log('API Running on 3000'));
 

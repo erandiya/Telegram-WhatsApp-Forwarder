@@ -12,3 +12,5 @@ $sql_create_logs_table = "CREATE TABLE IF NOT EXISTS sync_logs (
 $sql_get_recent_logs = "SELECT * FROM sync_logs ORDER BY created_at DESC LIMIT 10";
 $sql_get_stats = "SELECT status, COUNT(*) as count FROM sync_logs GROUP BY status";
 
+$sql_check_user = "SELECT * FROM admin_users WHERE username = :username LIMIT 1";
+$sql_update_login_time = "UPDATE admin_users SET last_login = NOW() WHERE id = :id";

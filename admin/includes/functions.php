@@ -78,4 +78,24 @@ function getRealTelegramStatus($pdo) {
     }
 }
 
+// සෙෂන් එක ආරක්ෂිතව ආරම්භ කිරීම
+function startSecureSession() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start([
+            'cookie_httponly' => true,
+            'cookie_secure' => false, // VPS එකේ SSL (HTTPS) ඇත්නම් මෙය true කරන්න
+            'use_only_cookies' => true,
+        ]);
+    }
+}
+
+// පරිශීලකයා ලොග් වී ඇත්දැයි බැලීම
+function checkAuth() {
+    startSecureSession();
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit;
+    }
+}
+
 ?>

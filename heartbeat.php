@@ -12,9 +12,6 @@ if (in_array($current_minute, $allowed_minutes) && $current_minute !== $last_hea
     
     echo "   [i] Heartbeat trigger detected at $current_full_time\n";
 
-    $wa_notif_conf = __DIR__ . '/tg-to-wa-heartbeat-whatsapp-channels.conf';
-    $tg_test_conf  = __DIR__ . '/tg-to-wa-test-telegrame-channels.conf';
-
     $wa_logo = __DIR__ . '/whatsapp1.png';
     $tg_logo = __DIR__ . '/telegram1.png';
 
@@ -26,14 +23,14 @@ if (in_array($current_minute, $allowed_minutes) && $current_minute !== $last_hea
         $target_id = trim($row['target_id']);
         
         if ($row['platform'] === 'WA') {
-            $wa_msg = "✅ *" . date('d') . "* -> " . $current_full_time . "\n⚓ *Direct Message*";
+            $wa_msg = "✅ *" . date('d') . "* -> " . $current_full_time;
             $img = file_exists($wa_logo) ? $wa_logo : null;
             $res = sendToWhatsAppAPI($target_id, $wa_msg, $img, false);
             echo "   [+] WhatsApp Heartbeat to $target_id: $res\n";
         } 
         elseif ($row['platform'] === 'TG' && $row['is_test_channel'] == 1) {
             try {
-                $tg_msg = "🫵 *" . date('d') . "* -> " . $current_full_time . "\n🪃 *Forward Test*";
+                $tg_msg = "🫵 *" . date('d') . "* -> " . $current_full_time;
                 if (file_exists($tg_logo)) {
                     $MadelineProto->messages->sendMedia([
                         'peer'    => $target_id,
