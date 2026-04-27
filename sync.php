@@ -65,7 +65,7 @@ while (true) {
     include 'heartbeat.php';
 
     // ඩේටාබේස් එකෙන් නීති ලබා ගැනීම
-    $replacements = $pdo->query("SELECT find_text, replace_with FROM word_replacements")->fetchAll(PDO::FETCH_KEY_PAIR);
+    $replacements = $pdo->query("SELECT find_text, replace_with FROM word_replacements WHERE `is_enabled`=1")->fetchAll(PDO::FETCH_KEY_PAIR);
     $mappings = $pdo->query("SELECT * FROM forward_mappings WHERE `is_enabled`=1")->fetchAll(PDO::FETCH_ASSOC);
 
     $download_dir = __DIR__ . '/downloads';
